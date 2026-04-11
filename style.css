@@ -30,6 +30,8 @@
   /* Project accent colors */
   --vocab-accent: #6366f1;
   --vocab-glow: rgba(99, 102, 241, 0.25);
+  --story-accent: #f472b6;
+  --story-glow: rgba(244, 114, 182, 0.25);
   --next-accent: #8b8b99;
 
   /* Border */
@@ -328,6 +330,16 @@ body {
   background: rgba(99, 102, 241, 0.1);
   color: var(--vocab-accent);
   border-color: rgba(99, 102, 241, 0.15);
+}
+
+.card-icon-story {
+  background: rgba(244, 114, 182, 0.1);
+  color: var(--story-accent);
+  border-color: rgba(244, 114, 182, 0.15);
+}
+
+.card-glow-story {
+  background: linear-gradient(180deg, var(--story-glow), transparent);
 }
 
 .card-icon-next {
