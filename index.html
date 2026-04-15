@@ -45,12 +45,18 @@
     <div class="section-header">
       <h2 class="section-title">Projects</h2>
       <p class="section-subtitle">Click any project to explore</p>
+      <a href="ecosystem-diagram.html" class="ecosystem-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        View Ecosystem Diagram
+      </a>
     </div>
 
     <div class="projects-grid">
 
       <!-- VocabVista Card -->
-      <a href="#" class="project-card" data-status="live">
+      <a href="https://admin.kreativeland.com" target="_blank" class="project-card" data-status="live">
         <div class="card-glow"></div>
         <div class="card-content">
           <div class="card-header">
@@ -72,7 +78,7 @@
           <div class="card-tags">
             <span class="tag">React</span>
             <span class="tag">FastAPI</span>
-            <span class="tag">SQLite</span>
+            <span class="tag">PostgreSQL</span>
           </div>
         </div>
         <div class="card-arrow">
@@ -83,7 +89,7 @@
       </a>
 
       <!-- Little Reader Storybooks Card -->
-      <a href="#" class="project-card" data-status="live">
+      <a href="https://reader.kreativeland.com" target="_blank" class="project-card" data-status="live">
         <div class="card-glow card-glow-story"></div>
         <div class="card-content">
           <div class="card-header">
@@ -113,25 +119,131 @@
         </div>
       </a>
 
-      <!-- Placeholder Card: Coming Soon -->
-      <div class="project-card card-placeholder">
+      <!-- PatternPhonics Card -->
+      <a href="https://phonics.kreativeland.com" target="_blank" class="project-card" data-status="live">
+        <div class="card-glow card-glow-phonics"></div>
         <div class="card-content">
           <div class="card-header">
-            <div class="card-icon card-icon-next">
+            <div class="card-icon card-icon-phonics">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="8" x2="12" y2="16"/>
-                <line x1="8" y1="12" x2="16" y2="12"/>
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
               </svg>
             </div>
-            <span class="card-status status-soon">Coming Soon</span>
+            <span class="card-status status-live">Live</span>
           </div>
-          <h3 class="card-title">Next Project</h3>
+          <h3 class="card-title">PatternPhonics</h3>
           <p class="card-description">
-            Something new is brewing. Stay tuned for the next creation from Kreative Land.
+            Phonics pattern generator for ESL learners. Breaks words into onset, vowel, 
+            and coda components with color-coded visual feedback.
           </p>
+          <div class="card-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">Phonics</span>
+            <span class="tag">ESL</span>
+          </div>
         </div>
-      </div>
+        <div class="card-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17l9.2-9.2M17 17V7H7"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- OllamaChat Card -->
+      <a href="#" class="project-card" data-status="live">
+        <div class="card-glow card-glow-chat"></div>
+        <div class="card-content">
+          <div class="card-header">
+            <div class="card-icon card-icon-chat">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <span class="card-status status-live">Live</span>
+          </div>
+          <h3 class="card-title">OllamaChat</h3>
+          <p class="card-description">
+            Local AI chat interface powered by Ollama. Talk to LLMs running on your 
+            own hardware with a clean, responsive UI.
+          </p>
+          <div class="card-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">Ollama</span>
+            <span class="tag">Local AI</span>
+          </div>
+        </div>
+        <div class="card-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17l9.2-9.2M17 17V7H7"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- EnglishExamPrep Card -->
+      <a href="https://exam.kreativeland.com" target="_blank" class="project-card" data-status="live">
+        <div class="card-glow card-glow-exam"></div>
+        <div class="card-content">
+          <div class="card-header">
+            <div class="card-icon card-icon-exam">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <span class="card-status status-live">Live</span>
+          </div>
+          <h3 class="card-title">EnglishExamPrep</h3>
+          <p class="card-description">
+            Tablet-first exam practice app for zhongkao English. Timed exams with 
+            confidence tracking, AI-generated papers, and weakness profiling.
+          </p>
+          <div class="card-tags">
+            <span class="tag">React</span>
+            <span class="tag">OpenAI</span>
+            <span class="tag">Vercel</span>
+          </div>
+        </div>
+        <div class="card-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17l9.2-9.2M17 17V7H7"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- VocabLearner Card -->
+      <a href="https://vocab.kreativeland.com" target="_blank" class="project-card" data-status="live">
+        <div class="card-glow card-glow-learner"></div>
+        <div class="card-content">
+          <div class="card-header">
+            <div class="card-icon card-icon-learner">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <span class="card-status status-live">Live</span>
+          </div>
+          <h3 class="card-title">VocabLearner</h3>
+          <p class="card-description">
+            SRS flashcard and quiz app for zhongkao vocabulary. Drills 1,629 official 
+            curriculum words with spaced repetition and weak word review.
+          </p>
+          <div class="card-tags">
+            <span class="tag">React</span>
+            <span class="tag">SRS</span>
+            <span class="tag">shadcn/ui</span>
+          </div>
+        </div>
+        <div class="card-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17l9.2-9.2M17 17V7H7"/>
+          </svg>
+        </div>
+      </a>
 
     </div>
   </section>

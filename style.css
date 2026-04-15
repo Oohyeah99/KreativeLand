@@ -32,6 +32,14 @@
   --vocab-glow: rgba(99, 102, 241, 0.25);
   --story-accent: #f472b6;
   --story-glow: rgba(244, 114, 182, 0.25);
+  --phonics-accent: #f59e0b;
+  --phonics-glow: rgba(245, 158, 11, 0.25);
+  --chat-accent: #e94560;
+  --chat-glow: rgba(233, 69, 96, 0.25);
+  --exam-accent: #22d3ee;
+  --exam-glow: rgba(34, 211, 238, 0.25);
+  --learner-accent: #fb7185;
+  --learner-glow: rgba(251, 113, 133, 0.25);
   --next-accent: #8b8b99;
 
   /* Border */
@@ -340,6 +348,67 @@ body {
 
 .card-glow-story {
   background: linear-gradient(180deg, var(--story-glow), transparent);
+}
+
+.card-icon-phonics {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--phonics-accent);
+  border-color: rgba(245, 158, 11, 0.15);
+}
+
+.card-glow-phonics {
+  background: linear-gradient(180deg, var(--phonics-glow), transparent);
+}
+
+.card-icon-chat {
+  background: rgba(233, 69, 96, 0.1);
+  color: var(--chat-accent);
+  border-color: rgba(233, 69, 96, 0.15);
+}
+
+.card-glow-chat {
+  background: linear-gradient(180deg, var(--chat-glow), transparent);
+}
+
+.card-icon-exam {
+  background: rgba(34, 211, 238, 0.1);
+  color: var(--exam-accent);
+  border-color: rgba(34, 211, 238, 0.15);
+}
+
+.card-glow-exam {
+  background: linear-gradient(180deg, var(--exam-glow), transparent);
+}
+
+.card-icon-learner {
+  background: rgba(251, 113, 133, 0.1);
+  color: var(--learner-accent);
+  border-color: rgba(251, 113, 133, 0.15);
+}
+
+.card-glow-learner {
+  background: linear-gradient(180deg, var(--learner-glow), transparent);
+}
+
+.ecosystem-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border: 1px solid rgba(124, 106, 239, 0.2);
+  border-radius: 100px;
+  background: var(--accent-subtle);
+  transition: background var(--duration) var(--ease), border-color var(--duration) var(--ease);
+  margin-top: 12px;
+}
+
+.ecosystem-link:hover {
+  background: rgba(124, 106, 239, 0.15);
+  border-color: rgba(124, 106, 239, 0.35);
 }
 
 .card-icon-next {
