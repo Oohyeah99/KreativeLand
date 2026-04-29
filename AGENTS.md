@@ -310,6 +310,7 @@ The Qoder Admin quest owns the KreativeLand portal website.
   - Spec: `../LittleLearner/docs/SPEC-forum-ai-pipeline.md`
 
 ### Completed
+- **VocabVista VM migration (2026-04-29):** Full VocabVista backend migrated from old Azure VM (20.205.61.171) to new VM (20.255.60.68). Installed PostgreSQL 16, Python 3.12 venv, FastAPI + all dependencies. Restored database (15,011 words, 4 users, 6,786 vocab entries). Created systemd service + nginx reverse proxy with Let's Encrypt SSL. All API endpoints verified working at https://api.kreativeland.com. Kaley's EnglishExamPrep data confirmed accessible.
 - **Workspace migration from OneDrive to D:\Projects\ (2026-04-29):** Verified all 7 projects at `D:\Projects\` with working git (external `.git` at `D:\GitRepos\`). Fixed hardcoded OneDrive paths in LittleLearner forum scripts (5 files) and VocabVista database utilities (3 files). Old OneDrive copies not deleted per KL request. All commits pushed to GitHub.
 - **New computer migration (2026-04-23):** Fixed all path references from `C:\Users\KL\OneDrive\` to `D:\OneDrive\` across 14 files. Migrated all 7 git repos to `D:\GitRepos\` with external .git pattern. Restructured Quest Registry (Qoder Admin moved to KreativeLand workspace, VocabVista PM moved to VocabVista workspace).
 - **LittleLearner workspace set up (2026-04-16):** Renamed Clone LittleLerner.kids to LittleLearner. AGENTS.md created with full To Do rules, shared infra docs, Scott task list. Added to Quest Registry. Portal card added ("Coming Soon" with teal accent).
@@ -334,10 +335,10 @@ The Qoder Admin quest owns the KreativeLand portal website.
   - english.kreativeland.com -- English Prep (英考通), custom domain on Vercel
   - kreativeland.com -- unreachable from Qoder shell (China GFW), KL confirms accessible via browser
 
-### Infrastructure Status (verified 2026-04-15)
+### Infrastructure Status (verified 2026-04-29)
 | Service | URL | Status |
 |---------|-----|--------|
-| VocabVista API | api.kreativeland.com | LIVE (Azure VM 20.205.61.171) |
+| VocabVista API | api.kreativeland.com | **LIVE (New Azure VM 20.255.60.68, migrated 2026-04-29)** |
 | LittleReader | reader.kreativeland.com | LIVE (Vercel) |
 | VocabLearner | vocab.kreativeland.com | LIVE (Vercel) |
 | PatternPhonics | phonics.kreativeland.com | LIVE (Vercel) |
@@ -346,11 +347,14 @@ The Qoder Admin quest owns the KreativeLand portal website.
 | KreativeLand Portal | kreativeland.com | LIVE (KL confirmed, blocked by GFW from Qoder shell) |
 
 ### Azure VM Deployment
-- **IP:** 20.205.61.171 (public) / 100.87.60.60 (Tailscale)
-- **SSH:** `azureuser` with password `?3198yXKb84f` -- **no SSH keys on current laptop** (old laptop had them, new GalaxyBook2 does not)
+- **New VM (production):** 20.255.60.68 (public), Ubuntu 24.04, PostgreSQL 16, nginx reverse proxy, Let's Encrypt SSL
+- **Old VM (reference):** 20.205.61.171 (public) / 100.87.60.60 (Tailscale) — still running, still accessible via Tailscale
+- **SSH:** `azureuser` with password `?3198yXKb84f` — **no SSH keys on current laptop** (old laptop had them, new GalaxyBook2 does not)
 - **Backend path:** `/opt/vocabvista/backend/`, service: `vocabvista.service` (systemd)
-- **Deploy method:** Use Python paramiko (SFTP upload + `echo PASSWORD | sudo -S` for file copy & restart). See `../qoder-fresh-setup-info.md` Section 5 for full instructions
-- **GFW note:** Public IP SSH fails from this laptop (GFW/proxy blocks it). **Always use Tailscale IP `100.87.60.60` for SSH** -- confirmed working 2026-04-21 via paramiko
+- **Deploy method:** Copy code to `/opt/vocabvista/backend/`, restart via `sudo systemctl restart vocabvista.service`
+- **Nginx config:** `/etc/nginx/sites-available/api.kreativeland.com` — reverse proxy to 127.0.0.1:8002
+- **Database:** PostgreSQL 16 at `localhost:5432`, db=`vocabvista`, user=`vocabvista`
+- **GFW note:** Public IP SSH may fail from this laptop (GFW/proxy blocks it). **Use Tailscale IP for the old VM** (`100.87.60.60`) -- confirmed working via paramiko
 
 ### Pending
 - Office computer: waiting for Scott to complete Tailscale + Ollama setup
