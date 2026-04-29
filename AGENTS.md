@@ -310,6 +310,7 @@ The Qoder Admin quest owns the KreativeLand portal website.
   - Spec: `../LittleLearner/docs/SPEC-forum-ai-pipeline.md`
 
 ### Completed
+- **Workspace migration from OneDrive to D:\Projects\ (2026-04-29):** Verified all 7 projects at `D:\Projects\` with working git (external `.git` at `D:\GitRepos\`). Fixed hardcoded OneDrive paths in LittleLearner forum scripts (5 files) and VocabVista database utilities (3 files). Old OneDrive copies not deleted per KL request. All commits pushed to GitHub.
 - **New computer migration (2026-04-23):** Fixed all path references from `C:\Users\KL\OneDrive\` to `D:\OneDrive\` across 14 files. Migrated all 7 git repos to `D:\GitRepos\` with external .git pattern. Restructured Quest Registry (Qoder Admin moved to KreativeLand workspace, VocabVista PM moved to VocabVista workspace).
 - **LittleLearner workspace set up (2026-04-16):** Renamed Clone LittleLerner.kids to LittleLearner. AGENTS.md created with full To Do rules, shared infra docs, Scott task list. Added to Quest Registry. Portal card added ("Coming Soon" with teal accent).
 - **Favicon and app icons created (2026-04-16):** Purple diamond icon matching portal branding. favicon.ico, SVG, PNGs (16/32/180/192/512), web manifest, theme-color meta. Deployed to kreativeland.com.
