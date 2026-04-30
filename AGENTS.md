@@ -37,7 +37,9 @@ Tasks across quests are often **interrelated and co-dependent**. Follow these ru
 3. **Document API contracts and shared interfaces** - if you create or change something another quest consumes, document it clearly in your status section
 4. **Qoder Admin has cross-project access** - the Qoder Admin quest can read and modify files in any project folder as needed for coordination, git housekeeping, and ecosystem-wide maintenance. Other quests should not modify files outside their own folder unless KL explicitly asks
 5. **Flag blockers** - if you're blocked on another quest's work, note it in your status section so KL and the other quest can see it
-6. **Reference the shared setup doc** - `../qoder-fresh-setup-info.md` has ecosystem-wide setup info, Microsoft To Do integration, and production architecture
+6. **Reference the shared setup docs:**
+   - `../qoder-fresh-setup-info.md` - ecosystem-wide setup info, Microsoft To Do integration, production architecture
+   - `docs/MULTI-QUEST-SYSTEM.md` - overview of KL's multi-quest development system. **New quests should read this on first creation** to understand how the system works
 
 ### Available Skills (MANDATORY CHECK BEFORE RELATED TASKS)
 
