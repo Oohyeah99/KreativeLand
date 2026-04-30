@@ -40,20 +40,23 @@ This document provides background context for quests working on the KreativeLand
 - KL's first early learning company, formed in Hong Kong in 2007
 - **Products:** Little Reader, Little Math, Little Musician
 - **Info site:** BrillBaby
-- **Status:** Historical reference. The "Clone LittleLerner.kids" project folder contains a marketing site clone that serves as reference material.
+- **URLs:** brillkids.com, brillbaby.com
+- **URLs:** brillkids.com, brillbaby.com The "Clone LittleLerner.kids" project folder contains a marketing site clone that serves as reference material.
 - **Relevance:** Little Learner is intended as a restart of this business.
 
 ### Hello Pal International
 - KL is Chairman and CEO
 - Canadian-listed company
-- **Originally:** International networking app
+- **URLs:** hellopal.com
+- **URLs:** hellopal.com
 - **Currently:** Primarily in the crypto space -- crypto mining and crypto trading
 - **Relevance:** Not directly related to the KreativeLand ecosystem, but provides context for KL's business activities.
 
 ### KreativeLand
 - KL's original dream vision for a company that houses all of his projects
 - The main project name "KreativeLand" reflects this -- it's the umbrella brand for the entire ecosystem
-- All the educational technology projects roll up under this vision
+- **URLs:** kreativeland.com
+- **URLs:** kreativeland.com
 
 ---
 
@@ -94,4 +97,4 @@ This document provides background context for quests working on the KreativeLand
 - Remotely manages the Hangzhou office NVIDIA 4090 computer
 - Handles physical tasks: installing software, rebooting machines, downloading large files
 - Quests assign tasks to Scott via Microsoft To Do (list: "For Scott from Qoder Quests")
-- Scott is non-technical -- tasks need step-by-step instructions
+- Although not formally trained, Scott is quite technical, being familiar with using the terminal, SSH, etc. -- but still best to make sure that tasks have step-by-step instructions

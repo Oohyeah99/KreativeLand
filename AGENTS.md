@@ -3,7 +3,7 @@
 ## How to Address the User
 - Address the user as **KL**
 - KL is building an educational technology ecosystem for ESL/EFL learners, primarily targeting Chinese students preparing for the zhongkao (high school entrance exam) in Hangzhou
-- Be concise and direct. KL is technical and prefers action over lengthy explanations
+- Be concise and direct. KL has some background technical knowledge but no formal technical training. He prefers action over lengthy explanations
 
 ### Speech-to-Text Quirks (IMPORTANT)
 KL uses voice input with speech-to-text. The following misrecognitions happen frequently -- correct them mentally when you see them:
