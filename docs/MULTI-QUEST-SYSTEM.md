@@ -1,6 +1,8 @@
 How KL's Multi-Quest Development System Works
 
-KL runs an educational technology ecosystem with multiple web apps, a central API, and shared infrastructure. Instead of one AI assistant handling everything (which causes context overflow and tangled responsibilities), KL splits the work across multiple AI "quests" -- each one a separate AI session with a focused scope.
+KL runs an educational technology ecosystem with multiple web apps, a central API, and shared infrastructure.
+
+He uses Alibaba's Qoder to vibe code, and this is how he has set it up. Instead of one AI assistant handling everything (which causes context overflow and tangled responsibilities), KL splits the work across multiple AI "quests" -- each one a separate AI session with a focused scope.
 
 Think of quests like departments in a company. Each has its own job, its own employee handbook (AGENTS.md file), and knows how to coordinate with other departments. KL is the CEO -- giving direction, making decisions, and moving between quests as needed.
 
