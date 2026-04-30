@@ -213,21 +213,30 @@ curl -s -X POST "https://graph.microsoft.com/v1.0/me/todo/lists/${LIST_ID}/tasks
 7. **Work top-to-bottom** - unless it's more efficient to do otherwise, process tasks in the order they appear (top of list first)
 8. **After finishing a starred task**, let KL know it's done, then continue with the next task automatically
 
-### Handling Expired Access Tokens (IMPORTANT)
+### Handling Expired Access Tokens (IMPORTANT -- NEVER ASK KL ABOUT THIS)
 
-Microsoft Graph API access tokens expire after ~1 hour. When using the Graph API fallback (curl/python), you will get HTTP 401 errors when the token expires. **Do NOT ask KL to re-authenticate.** Instead, use the refresh token to get a new access token programmatically:
+Microsoft Graph API access tokens expire after ~1 hour. When using the Graph API fallback (curl/python), you will get HTTP 401 errors when the token expires. **NEVER ask KL to re-authenticate or mention token problems.** Always refresh the token yourself using this exact process:
+
+**Step 1:** Read the client secret from any project's `.mcp.json` file (e.g., `D:\Projects\VocabVista\.mcp.json`, `D:\Projects\EnglishExamPrep\.mcp.json`):
+- **CLIENT_ID:** `b555eb09-6e28-4d34-b125-a184c9cc9dfa`
+- **CLIENT_SECRET:** Read the `CLIENT_SECRET` field from any `.mcp.json` file in the workspace
+
+**Step 2:** Run this exact script (substitute the actual client secret you found):
 
 ```python
-import json, urllib.request, urllib.parse
+import json, urllib.request, urllib.parse, sys
+sys.stdout.reconfigure(encoding='utf-8')
 
-# Read current tokens
-with open('D:/OneDrive/AI/Qoder Workspace/todoMCP/tokens.json') as f:
+# Read the CLIENT_SECRET from D:\Projects\VocabVista\.mcp.json (env.CLIENT_SECRET field)
+CLIENT_ID = 'b555eb09-6e28-4d34-b125-a184c9cc9dfa'
+CLIENT_SECRET = 'READ_FROM_MCP_JSON_FILE'  # <-- Replace with actual value
+
+with open(r'D:/OneDrive/AI/Qoder Workspace/todoMCP/tokens.json') as f:
     tokens = json.load(f)
 
-# Refresh using OAuth2 refresh_token grant
 data = urllib.parse.urlencode({
-    'client_id': 'b555eb09-6e28-4d34-b125-a184c9cc9dfa',
-    'client_secret': 'REDACTED_SEE_ENVIRONMENT',
+    'client_id': CLIENT_ID,
+    'client_secret': CLIENT_SECRET,
     'refresh_token': tokens['refreshToken'],
     'grant_type': 'refresh_token',
     'scope': 'Tasks.Read Tasks.ReadWrite Tasks.Read.Shared Tasks.ReadWrite.Shared'
@@ -241,21 +250,24 @@ req = urllib.request.Request(
 
 resp = json.loads(urllib.request.urlopen(req).read())
 
-# Save new tokens (MUST save - the refresh token rotates)
 new_tokens = {
     'accessToken': resp['access_token'],
     'refreshToken': resp.get('refresh_token', tokens['refreshToken'])
 }
-with open('D:/OneDrive/AI/Qoder Workspace/todoMCP/tokens.json', 'w') as f:
+with open(r'D:/OneDrive/AI/Qoder Workspace/todoMCP/tokens.json', 'w') as f:
     json.dump(new_tokens, f, indent=2)
+
+print('Token refreshed OK')
 ```
+
+**If refresh fails with 401:** The refresh token itself has expired (90 days without use). ONLY in this case, tell KL: "Microsoft To Do token expired -- I need you to run the auth flow in `D:\OneDrive\AI\Qoder Workspace\todoMCP\README.md` Section 1."
 
 **Key points:**
 - The refresh token is long-lived (90 days) but **rotates** -- each refresh returns a new refresh token. Always save it back to `tokens.json`
-- If the refresh token itself has expired (90 days without use), then KL must re-authenticate manually via the auth server flow (see `../qoder-fresh-setup-info.md` Section 1, Step 4)
-- The MCP server (`todo-index.ts`) handles token refresh automatically when loaded. The above is only needed for the Graph API fallback (curl/python)
-- **Always try refreshing before asking KL to re-authenticate.** The manual re-auth flow requires opening a browser and is disruptive
-- **Python 3.14 note:** f-strings with dictionary key access (e.g., `f"{d['key']}"`) cause SyntaxError. Use string concatenation or temp variables instead. Also set `sys.stdout.reconfigure(encoding='utf-8')` for Chinese text output
+- The MCP server handles token refresh automatically when loaded. The script above is only needed for the Graph API fallback (curl/python)
+- **Always try refreshing BEFORE asking KL to re-authenticate.** The manual re-auth flow requires opening a browser and is disruptive
+- **Python 3.14 note:** f-strings with dictionary key access (e.g., `f"{d['key']}"`) cause SyntaxError. Use string concatenation or temp variables instead
+- **The client secret is in `.mcp.json` files**, NOT in this AGENTS.md (GitHub blocks pushes containing secrets)
 
 ---
 
