@@ -21,6 +21,7 @@ Multiple quests run concurrently across the KreativeLand ecosystem. Each quest i
 | **ZhongkaoPrep** | ZhongkaoPrep | `../ZhongkaoPrep/AGENTS.md` | ZhongkaoPrep frontend app (中考冲刺) - Multi-subject zhongkao exam practice (math, science) |
 | **Little Learner** | LittleLearner | `../LittleLearner/AGENTS.md` | LittleLearner early education app (reading, music, math) for infants/toddlers |
 | **Little Learner PM** | LittleLearner | `../LittleLearner/AGENTS.md` | Roadmap, UI/UX design, feature specs for LittleLearner product line |
+| **Office Ollama Coordinator** | KreativeLand | This file | Batch Ollama processing on office PC, example sentence generation, word categorization |
 
 ### Quest Workspace Paths
 All projects: `D:\Projects\`
@@ -257,6 +258,36 @@ Quick reference:
 - **Database:** PostgreSQL 16 at `localhost:5432`, db=`vocabvista`, user=`vocabvista`
 
 ### Pending
-- Office computer: waiting for Scott to complete Tailscale + Ollama setup
+- Office computer: waiting for Scott to fix nginx catch-all (ai-playground symlink)
 - KreativeLand portal frontend updates (as needed)
 - Ongoing cross-quest coordination
+
+---
+
+## Quest Status: Office Ollama Coordinator
+
+**Quest:** Office Ollama Coordinator
+**Scope:** Batch Ollama processing on office PC (100.113.43.60), example sentence generation, word categorization, long-running LLM tasks
+**To Do list:** TBD (KL to create)
+**Workspace:** `D:\Projects\VocabVista\` (runs scripts from VocabVista but is a separate quest to free up VocabVista for other work)
+
+### Current Focus
+- **Resuming example sentence generation** -- 720/6,333 words completed (11.4%, 72 batches). Script: `D:\Projects\VocabVista\scripts\generate_example_sentences.py --limit 10000`
+- Script skips already-processed words, so it will continue from batch 73
+
+### Handoff from VocabVista Backend Quest
+The VocabVista backend quest was running the example sentence generation but stopped due to Tailscale connection loss (KL's laptop went to sleep overnight). Status as of handoff:
+- **Tailscale is now working again** -- ping 100.113.43.60 shows 0% packet loss, 66ms avg
+- **Ollama is responding** -- API returns model list normally
+- **Recommended model:** `qwen3.6:35b-a3b` (MoE, 3B active params, fits in 24GB VRAM)
+- **IMPORTANT: Python urllib proxy bypass** -- When calling office Ollama from Python, you MUST use `urllib.request.build_opener(urllib.request.ProxyHandler({}))` to bypass the system GFW proxy, otherwise you get 502 errors. See SKILL-office-pc.md for details.
+- 720 words already have example sentences in the DB. The script skips existing ones.
+
+### Blockers
+- None currently
+
+### Infrastructure Notes
+- Office PC: 100.113.43.60 (Tailscale), RTX 4090, 64GB RAM
+- Ollama endpoint: `http://100.113.43.60:11434`
+- **DO NOT use local laptop Ollama** (`localhost:11434`)
+- See **SKILL-office-pc.md** for full details on models, proxy bypass, and ComfyUI
