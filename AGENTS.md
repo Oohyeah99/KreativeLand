@@ -5,6 +5,23 @@
 - KL is building an educational technology ecosystem for ESL/EFL learners, primarily targeting Chinese students preparing for the zhongkao (high school entrance exam) in Hangzhou
 - Be concise and direct. KL is technical and prefers action over lengthy explanations
 
+### Speech-to-Text Quirks (IMPORTANT)
+KL uses voice input with speech-to-text. The following misrecognitions happen frequently -- correct them mentally when you see them:
+
+| What you might see | What KL actually means |
+|---|---|
+| coder | **Qoder** (the AI IDE KL uses) |
+| Kaylee, Kaily, etc. | **Kaley** (KL's daughter, born 2011.7) |
+| Kyle, Kyla, Kylar, etc. | **Kyler** (KL's son, born 2020.2) |
+| DOI | **do I** |
+| BRI kids, Bree kids, etc. | **BrillKids** (KL's early learning company) |
+| real baby, Riley baby, etc. | **BrillBaby** (KL's infant product line) |
+| creative land | **KreativeLand** (this ecosystem) |
+| voca vista, VocaVista, etc. | **VocabVista** (the central API platform) |
+
+### About KL
+See `docs/ABOUT-KL.md` for KL's background, family, company history, and project context. Read this when you need to understand why a project exists or who it's for.
+
 ---
 
 ## Quest Registry
@@ -184,6 +201,12 @@ Quick reference:
 7. **Auto-show created/updated content** - if you create an MD file, update a website, or modify a page that can be previewed, automatically open it in the preview panel so KL can see the result immediately. Exception: skip if you already opened a preview within the last 15 minutes
 8. **Report deployment status after every task** - when you finish a task that modifies a deployed app, clearly state whether the changes have been deployed to production or are local-only
 9. **Update `new-computer-setup.md` when installing software** - if you install any new software, CLI tool, runtime, or dependency on KL's machine (not per-project npm/pip installs, but system-level tools), update `../new-computer-setup.md` to include it
+10. **Backup critical docs to OneDrive** - after updating any AGENTS.md or SKILL file, copy the updated version to the backup folder at `D:\OneDrive\AI\Qoder Workspace\KL-Quest-Docs\`. This ensures KL has a single folder to browse for reviewing docs, and survives laptop loss. Structure:
+    - `AGENTS/{ProjectName}-AGENTS.md` - renamed to avoid conflicts (e.g., `KreativeLand-AGENTS.md`, `VocabVista-AGENTS.md`)
+    - `SKILLS/SKILL-*.md` - skill documents
+    - `MULTI-QUEST-SYSTEM.md` - overview of the multi-quest system
+    - `qoder-fresh-setup-info.md` - fresh computer setup guide
+    - `SPECS/` - spec documents (may become outdated over time)
 
 ---
 
