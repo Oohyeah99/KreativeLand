@@ -52,6 +52,17 @@ Tasks across quests are often **interrelated and co-dependent**. Follow these ru
 
 **Rule:** If your task involves Microsoft To Do, the office PC, git operations, or the Azure VM, read the relevant skill BEFORE starting. Do NOT rely on memory or attempt from scratch.
 
+### Office Ollama Coordinator -- Use for Batch LLM Tasks
+
+**Do NOT run long Ollama batch jobs yourself** (example sentence generation, word categorization, bulk embedding, etc.). These can take hours and block your quest from other work. Instead, request them from the **Office Ollama Coordinator** quest:
+
+1. Note the task in your AGENTS.md Pending section, referencing the Office Ollama Coordinator
+2. The coordinator checks `D:\Projects\KreativeLand\AGENTS.md` for its status section and picks up tasks
+3. Check the coordinator's status section for progress updates
+4. The coordinator updates its status section when tasks are complete
+
+This keeps your quest responsive while the coordinator handles hours-long batch processing on the office 4090 GPU.
+
 ### Handoff & Spec Protocol (MANDATORY)
 
 When you receive a handoff document (`HANDOFF-*.md`, `docs/HANDOFF-*.md`) or a spec document (`SPEC-*.md`, `docs/SPEC-*.md`), or instructions referencing a previous quest's work:
