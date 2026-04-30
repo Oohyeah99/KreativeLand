@@ -38,6 +38,19 @@ Tasks across quests are often **interrelated and co-dependent**. Follow these ru
 5. **Flag blockers** - if you're blocked on another quest's work, note it in your status section so KL and the other quest can see it
 6. **Reference the shared setup doc** - `../qoder-fresh-setup-info.md` has ecosystem-wide setup info, Microsoft To Do integration, and production architecture
 
+### Available Skills (MANDATORY CHECK BEFORE RELATED TASKS)
+
+**Before performing any task that falls into one of these categories, you MUST read the corresponding skill document first.** This prevents reinventing the wheel and ensures consistency across all quests. Skills are at `D:\Projects\KreativeLand\SKILL-*.md`.
+
+| Skill | File | Use When |
+|-------|------|----------|
+| **Microsoft To Do** | `SKILL-microsoft-todo.md` | Reading/creating/updating tasks, token refresh, assigning to Scott |
+| **Office PC** | `SKILL-office-pc.md` | Using Ollama on office PC, ComfyUI, assigning Scott tasks, hardware specs |
+| **Git Workflow** | `SKILL-git-workflow.md` | Making commits, pushing to GitHub, setting up repos, fixing git issues |
+| **Azure VM** | `SKILL-azure-vm.md` | Deploying VocabVista, nginx config, database management, SSH to VM |
+
+**Rule:** If your task involves Microsoft To Do, the office PC, git operations, or the Azure VM, read the relevant skill BEFORE starting. Do NOT rely on memory or attempt from scratch.
+
 ### Handoff & Spec Protocol (MANDATORY)
 
 When you receive a handoff document (`HANDOFF-*.md`, `docs/HANDOFF-*.md`) or a spec document (`SPEC-*.md`, `docs/SPEC-*.md`), or instructions referencing a previous quest's work:
@@ -65,38 +78,7 @@ git config user.name "KL"
 git config user.email "kl@kreativeland.com"
 ```
 
-### Git Repository Setup (IMPORTANT - OneDrive Safe)
-
-**Problem:** OneDrive corrupts/deletes `.git` directories because it aggressively syncs the small binary files inside them. This has destroyed git repos across all projects multiple times.
-
-**Solution:** All `.git` directories are stored OUTSIDE OneDrive at `D:\GitRepos\`. Each project folder in OneDrive has a `.git` **file** (not directory) that points to the external location.
-
-| Project | .git file content | GitHub Remote |
-|---------|------------------|---------------|
-| VocabVista | `gitdir: D:/GitRepos/VocabVista.git` | https://github.com/Oohyeah99/VocabVista.git |
-| EnglishExamPrep | `gitdir: D:/GitRepos/EnglishExamPrep.git` | https://github.com/Oohyeah99/EnglishExamPrep.git |
-| ZhongkaoPrep | `gitdir: D:/GitRepos/ZhongkaoPrep.git` | https://github.com/Oohyeah99/ZhongkaoPrep.git |
-| LittleReader | `gitdir: D:/GitRepos/LittleReader.git` | https://github.com/Oohyeah99/LittleReader.git |
-| KreativeLand | `gitdir: D:/GitRepos/KreativeLand.git` | https://github.com/Oohyeah99/KreativeLand.git |
-| LittleLearner | `gitdir: D:/GitRepos/LittleLearner.git` | https://github.com/Oohyeah99/LittleLearner.git |
-| AIPlayground | `gitdir: D:/GitRepos/AIPlayground.git` | https://github.com/Oohyeah99/AIPlayground.git |
-
-**Rules for all quests:**
-1. **NEVER delete or modify the `.git` file** in the project folder. It's a tiny text file, not a directory
-2. **If git stops working** (e.g., "not a git repository"), check if the `.git` file still exists and contains the correct `gitdir:` path. If OneDrive deleted it, recreate it
-3. **To init a new project with this pattern:**
-   ```bash
-   git init --separate-git-dir="D:/GitRepos/ProjectName.git"
-   git remote add origin https://github.com/Oohyeah99/ProjectName.git
-   git config user.name "KL"
-   git config user.email "kl@kreativeland.com"
-   ```
-4. **Always use HTTP/1.1 for push** (GFW blocks HTTP/2 to GitHub):
-   ```bash
-   git -c http.version=HTTP/1.1 -c http.postBuffer=524288000 push origin master
-   ```
-5. **Credential popup prevention:** Global git config has `credential.guiPrompt=false` and `credential.interactive=never`. Credentials are cached by Git Credential Manager. If a push fails with auth error, the cached OAuth token may have expired -- re-run the push and GCM will refresh it silently
-6. **If push fails with connection reset / timeout (GFW):** KL has a proxy that is usually ON but sometimes OFF. Tell KL: "Push failed -- likely GFW. Can you check your proxy is on?" and retry after confirmation. Do NOT silently retry more than once
+For all git operations (push, commit, repo setup, troubleshooting), see **SKILL-git-workflow.md**.
 
 ### Local Laptop Ollama -- DO NOT USE
 
@@ -109,6 +91,8 @@ git config user.email "kl@kreativeland.com"
 - The only exception is when KL is actively developing/testing and explicitly asks to use local Ollama
 
 **Reason:** Local Ollama runs on KL's laptop CPU (Intel Core Ultra X9 + 32GB RAM) and impacts system performance. It should only be used when KL specifically needs it for development or testing purposes.
+
+For office PC Ollama access, ComfyUI, and hardware specs, see **SKILL-office-pc.md**.
 
 ---
 
@@ -158,116 +142,20 @@ git config user.email "kl@kreativeland.com"
 
 ---
 
-## Microsoft To Do Integration (todoMCP)
+## Microsoft To Do Integration
 
-Agents can read and manage tasks in Microsoft To Do via the MCP protocol. See `../qoder-fresh-setup-info.md` for full setup instructions, Graph API fallback, and troubleshooting.
+Agents can read and manage tasks in Microsoft To Do via the MCP protocol.
 
-### Configuration
-The MCP server is configured in `.mcp.json` at the project root. If the mstodo MCP server is not available in the session, use the Microsoft Graph API directly with the access token in `../todoMCP/tokens.json`.
+**See SKILL-microsoft-todo.md for complete documentation including:**
+- Task list mapping for all quests
+- Token refresh procedure (NEVER ask KL about token problems)
+- Creating tasks for Scott
+- Graph API endpoints and workflow rules
 
-### Task List Mapping
-| Quest | To Do List Name |
-|-------|-----------------|
-| Qoder Admin | "Qoder PM (Quest)" |
-| VocabVista | "Vocab Vista (Quest)" |
-| VocabVista Product Manager | "Vocab Vista (Quest)" |
-| Little Reader Storybook | "LR Storybooks (Quest)" |
-| English Prep | "English Prep App (Quest)" |
-| ZhongkaoPrep | "ZK Prep (Quest)" |
-| Little Learner | "Learner Website (Quest)" |
-| Little Learner PM | "Learner Website (Quest)" |
-| **Scott (human assistant)** | "For Scott from Qoder Quests" |
-
-### Assigning Tasks to Scott (Human Assistant)
-
-Scott is KL's office assistant who manages the office PC (hp-pc1, 100.113.43.60) with the Nvidia 4090 GPU. Any quest can create tasks for Scott when physical/manual intervention is needed on the office machine (e.g., installing software, rebooting, checking hardware).
-
-**To Do List:** "For Scott from Qoder Quests"
-**List ID:** `AQMkADAwATM3ZmYAZS04OABjMS1mOTg2LTAwAi0wMAoALgAAA2g773rSOQhIms6qpVd3BLgBAPPHOT4NZ0tCnZHsl_2wI-EACZ7j-cgAAAA=`
-
-**How to create a task for Scott:**
-```bash
-TOKEN=$(python3 -c "import json; f=open('D:/OneDrive/AI/Qoder Workspace/todoMCP/tokens.json'); d=json.load(f); print(d['accessToken'])")
-LIST_ID="AQMkADAwATM3ZmYAZS04OABjMS1mOTg2LTAwAi0wMAoALgAAA2g773rSOQhIms6qpVd3BLgBAPPHOT4NZ0tCnZHsl_2wI-EACZ7j-cgAAAA="
-# Write task body to a temp JSON file, then:
-curl -s -X POST "https://graph.microsoft.com/v1.0/me/todo/lists/${LIST_ID}/tasks" \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d @task_body.json
-```
-
-**Rules for Scott tasks:**
-1. Always include clear step-by-step instructions in the task body -- Scott is non-technical
-2. Reference the setup doc (`../office-computer-setup-for-scott.md`) when applicable
-3. Set `"importance": "high"` for urgent tasks
-4. Ask Scott to send results/screenshots back to "Master KL" for verification
-5. Scott's setup document: `D:\Projects\office-computer-setup-for-scott.md`
-
-### Task Workflow Rules
-1. **Only check the relevant task list** for this project's quest. Do not scan other lists unless KL explicitly asks
-2. **Only check the task list when KL asks** - triggers include: "todo", "check task list", "task list", or similar phrases. When triggered, immediately fetch all tasks from the relevant list and **start executing them right away -- do NOT ask KL for confirmation or permission to proceed**. KL asking you to check the list IS the instruction to do the work
-3. **Always read the notes** (body content) of each task and check for **attachments** (images, files). These contain important context and instructions
-4. **Never mark tasks as completed** in To Do. Instead, append "(DONE)" to the task title when finished. Only KL marks tasks as complete
-5. **Skip draft tasks** - ignore any task whose title starts with "dft", "DFT", or "DRAFT"
-6. **Starred/high-importance tasks first** - do these before anything else, notify KL when done, then automatically proceed with the rest
-7. **Work top-to-bottom** - unless it's more efficient to do otherwise, process tasks in the order they appear (top of list first)
-8. **After finishing a starred task**, let KL know it's done, then continue with the next task automatically
-
-### Handling Expired Access Tokens (IMPORTANT -- NEVER ASK KL ABOUT THIS)
-
-Microsoft Graph API access tokens expire after ~1 hour. When using the Graph API fallback (curl/python), you will get HTTP 401 errors when the token expires. **NEVER ask KL to re-authenticate or mention token problems.** Always refresh the token yourself using this exact process:
-
-**Step 1:** Read the client secret from any project's `.mcp.json` file (e.g., `D:\Projects\VocabVista\.mcp.json`, `D:\Projects\EnglishExamPrep\.mcp.json`):
-- **CLIENT_ID:** `b555eb09-6e28-4d34-b125-a184c9cc9dfa`
-- **CLIENT_SECRET:** Read the `CLIENT_SECRET` field from any `.mcp.json` file in the workspace
-
-**Step 2:** Run this exact script (substitute the actual client secret you found):
-
-```python
-import json, urllib.request, urllib.parse, sys
-sys.stdout.reconfigure(encoding='utf-8')
-
-# Read the CLIENT_SECRET from D:\Projects\VocabVista\.mcp.json (env.CLIENT_SECRET field)
-CLIENT_ID = 'b555eb09-6e28-4d34-b125-a184c9cc9dfa'
-CLIENT_SECRET = 'READ_FROM_MCP_JSON_FILE'  # <-- Replace with actual value
-
-with open(r'D:/OneDrive/AI/Qoder Workspace/todoMCP/tokens.json') as f:
-    tokens = json.load(f)
-
-data = urllib.parse.urlencode({
-    'client_id': CLIENT_ID,
-    'client_secret': CLIENT_SECRET,
-    'refresh_token': tokens['refreshToken'],
-    'grant_type': 'refresh_token',
-    'scope': 'Tasks.Read Tasks.ReadWrite Tasks.Read.Shared Tasks.ReadWrite.Shared'
-}).encode()
-
-req = urllib.request.Request(
-    'https://login.microsoftonline.com/consumers/oauth2/v2.0/token',
-    data=data,
-    headers={'Content-Type': 'application/x-www-form-urlencoded'}
-)
-
-resp = json.loads(urllib.request.urlopen(req).read())
-
-new_tokens = {
-    'accessToken': resp['access_token'],
-    'refreshToken': resp.get('refresh_token', tokens['refreshToken'])
-}
-with open(r'D:/OneDrive/AI/Qoder Workspace/todoMCP/tokens.json', 'w') as f:
-    json.dump(new_tokens, f, indent=2)
-
-print('Token refreshed OK')
-```
-
-**If refresh fails with 401:** The refresh token itself has expired (90 days without use). ONLY in this case, tell KL: "Microsoft To Do token expired -- I need you to run the auth flow in `D:\OneDrive\AI\Qoder Workspace\todoMCP\README.md` Section 1."
-
-**Key points:**
-- The refresh token is long-lived (90 days) but **rotates** -- each refresh returns a new refresh token. Always save it back to `tokens.json`
-- The MCP server handles token refresh automatically when loaded. The script above is only needed for the Graph API fallback (curl/python)
-- **Always try refreshing BEFORE asking KL to re-authenticate.** The manual re-auth flow requires opening a browser and is disruptive
-- **Python 3.14 note:** f-strings with dictionary key access (e.g., `f"{d['key']}"`) cause SyntaxError. Use string concatenation or temp variables instead
-- **The client secret is in `.mcp.json` files**, NOT in this AGENTS.md (GitHub blocks pushes containing secrets)
+Quick reference:
+- **Tokens file:** `D:\OneDrive\AI\Qoder Workspace\todoMCP\tokens.json`
+- **MCP config:** `.mcp.json` at project root
+- **Scott's list:** "For Scott from Qoder Quests"
 
 ---
 
@@ -359,14 +247,14 @@ The Qoder Admin quest owns the KreativeLand portal website.
 | KreativeLand Portal | kreativeland.com | LIVE (KL confirmed, blocked by GFW from Qoder shell) |
 
 ### Azure VM Deployment
-- **New VM (production):** 20.255.60.68 (public), Ubuntu 24.04, PostgreSQL 16, nginx reverse proxy, Let's Encrypt SSL
-- **Old VM (reference):** 20.205.61.171 (public) / 100.87.60.60 (Tailscale) — still running, still accessible via Tailscale
-- **SSH:** `azureuser` with password `?3198yXKb84f` — **no SSH keys on current laptop** (old laptop had them, new GalaxyBook2 does not)
-- **Backend path:** `/opt/vocabvista/backend/`, service: `vocabvista.service` (systemd)
-- **Deploy method:** Copy code to `/opt/vocabvista/backend/`, restart via `sudo systemctl restart vocabvista.service`
-- **Nginx config:** `/etc/nginx/sites-available/api.kreativeland.com` — reverse proxy to 127.0.0.1:8002
+For complete documentation including deployment steps, nginx config, database management, and troubleshooting, see **SKILL-azure-vm.md**.
+
+Quick reference:
+- **New VM (production):** 20.255.60.68, Ubuntu 24.04, PostgreSQL 16, nginx
+- **Old VM (reference):** 20.205.61.171 / 100.87.60.60 (Tailscale)
+- **SSH:** `azureuser` with password `?3198yXKb84f`
+- **Backend path:** `/opt/vocabvista/backend/`, service: `vocabvista.service`
 - **Database:** PostgreSQL 16 at `localhost:5432`, db=`vocabvista`, user=`vocabvista`
-- **GFW note:** Public IP SSH may fail from this laptop (GFW/proxy blocks it). **Use Tailscale IP for the old VM** (`100.87.60.60`) -- confirmed working via paramiko
 
 ### Pending
 - Office computer: waiting for Scott to complete Tailscale + Ollama setup
