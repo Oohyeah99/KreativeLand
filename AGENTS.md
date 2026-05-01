@@ -31,7 +31,8 @@ Multiple quests run concurrently across the KreativeLand ecosystem. Each quest i
 | Quest Name | Workspace Folder | AGENTS.md | Responsibility |
 |------------|-----------------|-----------|----------------|
 | **Qoder Admin** | KreativeLand | This file | KreativeLand portal, cross-quest coordination, Scott/office PC, infrastructure |
-| **VocabVista** | VocabVista | `../VocabVista/AGENTS.md` | VocabVista backend API, vocabulary database, word list generation, story generation |
+| **Vista Admin** | VocabVista | `../VocabVista/AGENTS.md` | Vista Admin management console, backend API (FastAPI), vocabulary database, word lists, story/media generation |
+| **VocabVista Learner** | VocabVista | `../VocabVista/AGENTS.md` | VocabVista learner-facing study app — onboarding, flashcards, reading practice, progress tracking |
 | **VocabVista Product Manager** | VocabVista | `../VocabVista/AGENTS.md` | Roadmap, UI/UX design, feature specs for all VocabVista-connected apps |
 | **Little Reader Storybook** | LittleReader | `../LittleReader/AGENTS.md` | LittleReader frontend app - serving stories to younger children |
 | **English Prep** | EnglishExamPrep | `../EnglishExamPrep/AGENTS.md` | EnglishExamPrep frontend app (英考通) - English exam practice for KL's 15yo daughter |
@@ -207,7 +208,8 @@ Quick reference:
     - `MULTI-QUEST-SYSTEM.md` - overview of the multi-quest system
     - `qoder-fresh-setup-info.md` - fresh computer setup guide
     - `SPECS/` - spec documents (may become outdated over time)
-11. **Notify KL of AGENTS.md updates (MANDATORY)** - after making significant changes to your AGENTS.md (status updates, completed tasks, new blockers, architectural changes), you MUST explicitly tell KL that: (a) your AGENTS.md has been updated, AND (b) the OneDrive backup copy has been updated. Do not wait for KL to ask. This keeps KL informed and ensures the backup is always current.
+11. **Notify KL of AGENTS.md updates (MANDATORY)** - after making significant changes to your AGENTS.md (status updates, completed tasks, new blockers, architectural changes), you MUST explicitly tell KL that: (a) your AGENTS.md has been updated, AND (b) the OneDrive backup copy has been updated. Do not wait for KL to ask.
+12. **Commit and push after code changes (MANDATORY)** - after making any significant code changes (new features, bug fixes, file additions/deletions, config changes), you MUST commit and push them. Do NOT leave changes unstaged or unpushed. Run `git status` periodically to check for unstaged changes. If you see them, commit and push immediately. Keep `.gitignore` clean -- do not let temp files, cookies, or build artifacts accumulate.
 
 ---
 
@@ -324,8 +326,8 @@ Quick reference:
 - Discovered DB has 10,814 total words (not 6,333 as originally estimated)
 - Auto-restart scripts created: `scripts/run_until_done.py`, `scripts/run_until_done2.py`, `scripts/check_remaining.py`
 
-### Handoff from VocabVista Backend Quest
-The VocabVista backend quest created this coordinator role to free itself for other work. Key setup notes:
+### Handoff from Vista Admin Quest
+The Vista Admin quest created this coordinator role to free itself for other work. Key setup notes:
 - **Model:** `qwen3.6:35b-a3b` (MoE, 3B active params, fits in 24GB VRAM)
 - **IMPORTANT: Python urllib proxy bypass** -- When calling office Ollama from Python, you MUST use `urllib.request.build_opener(urllib.request.ProxyHandler({}))` to bypass the system GFW proxy, otherwise you get 502 errors. See SKILL-office-pc.md for details.
 
