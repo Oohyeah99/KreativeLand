@@ -28,18 +28,28 @@
   --status-soon-bg: rgba(245, 158, 11, 0.1);
 
   /* Project accent colors */
-  --vocab-accent: #6366f1;
-  --vocab-glow: rgba(99, 102, 241, 0.25);
+  --vista-admin-accent: #6366f1;
+  --vista-admin-glow: rgba(99, 102, 241, 0.25);
+  --vocab-learner-accent: #10b981;
+  --vocab-learner-glow: rgba(16, 185, 129, 0.25);
   --story-accent: #f472b6;
   --story-glow: rgba(244, 114, 182, 0.25);
   --phonics-accent: #f59e0b;
   --phonics-glow: rgba(245, 158, 11, 0.25);
   --chat-accent: #e94560;
   --chat-glow: rgba(233, 69, 96, 0.25);
-  --exam-accent: #22d3ee;
-  --exam-glow: rgba(34, 211, 238, 0.25);
+  --exam-accent: #6366f1;
+  --exam-glow: rgba(99, 102, 241, 0.25);
+  --zkprep-accent: #3b82f6;
+  --zkprep-glow: rgba(59, 130, 246, 0.25);
   --learner-accent: #fb7185;
   --learner-glow: rgba(251, 113, 133, 0.25);
+  --littlelearner-accent: #2dd4bf;
+  --littlelearner-glow: rgba(45, 212, 191, 0.25);
+  --brillkids-accent: #fbbf24;
+  --brillkids-glow: rgba(251, 191, 36, 0.25);
+  --playground-accent: #22d3ee;
+  --playground-glow: rgba(34, 211, 238, 0.25);
   --next-accent: #8b8b99;
 
   /* Border */
@@ -340,6 +350,26 @@ body {
   border-color: rgba(99, 102, 241, 0.15);
 }
 
+.card-icon-vista-admin {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--vista-admin-accent);
+  border-color: rgba(99, 102, 241, 0.15);
+}
+
+.card-glow-vista-admin {
+  background: linear-gradient(180deg, var(--vista-admin-glow), transparent);
+}
+
+.card-icon-vocab-learner {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--vocab-learner-accent);
+  border-color: rgba(16, 185, 129, 0.15);
+}
+
+.card-glow-vocab-learner {
+  background: linear-gradient(180deg, var(--vocab-learner-glow), transparent);
+}
+
 .card-icon-story {
   background: rgba(244, 114, 182, 0.1);
   color: var(--story-accent);
@@ -371,13 +401,23 @@ body {
 }
 
 .card-icon-exam {
-  background: rgba(34, 211, 238, 0.1);
+  background: rgba(99, 102, 241, 0.1);
   color: var(--exam-accent);
-  border-color: rgba(34, 211, 238, 0.15);
+  border-color: rgba(99, 102, 241, 0.15);
 }
 
 .card-glow-exam {
   background: linear-gradient(180deg, var(--exam-glow), transparent);
+}
+
+.card-icon-zkprep {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--zkprep-accent);
+  border-color: rgba(59, 130, 246, 0.15);
+}
+
+.card-glow-zkprep {
+  background: linear-gradient(180deg, var(--zkprep-glow), transparent);
 }
 
 .card-icon-learner {
@@ -388,6 +428,35 @@ body {
 
 .card-glow-learner {
   background: linear-gradient(180deg, var(--learner-glow), transparent);
+}
+
+.card-icon-littlelearner {
+  background: rgba(45, 212, 191, 0.1);
+  color: var(--littlelearner-accent);
+  border-color: rgba(45, 212, 191, 0.15);
+}
+
+.card-glow-littlelearner {
+  background: linear-gradient(180deg, var(--littlelearner-glow), transparent);
+}
+
+.card-icon-brillkids {
+  background: rgba(251, 191, 36, 0.1);
+  color: var(--brillkids-accent);
+}
+
+.card-glow-brillkids {
+  background: linear-gradient(180deg, var(--brillkids-glow), transparent);
+}
+
+.card-icon-playground {
+  background: rgba(34, 211, 238, 0.1);
+  color: var(--playground-accent);
+  border-color: rgba(34, 211, 238, 0.15);
+}
+
+.card-glow-playground {
+  background: linear-gradient(180deg, var(--playground-glow), transparent);
 }
 
 .ecosystem-link {
