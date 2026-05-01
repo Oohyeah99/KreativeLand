@@ -132,7 +132,8 @@ For office PC Ollama access, ComfyUI, and hardware specs, see **SKILL-office-pc.
 
 | Project | Type | Tech Stack | Live URL | Status |
 |---------|------|------------|----------|--------|
-| **VocabVista** | Full-stack API + Admin UI | Python FastAPI + React 18 + Vite 6 | Backend on Azure VM | Active - central platform |
+| **Vista Admin** | Full-stack API + Admin UI | Python FastAPI + React 18 + Vite 6 | https://admin.kreativeland.com | Active - backend management console |
+| **VocabVista Learner** | React SPA ( Coming Soon ) | React + Spaced Repetition | vocabvista.kreativeland.com (pending) | Active - new learner-facing app |
 | **EnglishExamPrep** | React SPA | React 19, Vite 8, TypeScript 6, Tailwind v4 | https://english.kreativeland.com | Active |
 | **ZhongkaoPrep** | React SPA | React 19, Vite 8, TypeScript 6, Tailwind v4, KaTeX | https://exam.kreativeland.com | Active - v2.0 live |
 | **LittleReader** | React SPA | React 18, Vite 6, Tailwind 3 | https://reader.kreativeland.com | Active |
