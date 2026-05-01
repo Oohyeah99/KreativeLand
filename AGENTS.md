@@ -207,6 +207,7 @@ Quick reference:
     - `MULTI-QUEST-SYSTEM.md` - overview of the multi-quest system
     - `qoder-fresh-setup-info.md` - fresh computer setup guide
     - `SPECS/` - spec documents (may become outdated over time)
+11. **Notify KL of AGENTS.md updates (MANDATORY)** - after making significant changes to your AGENTS.md (status updates, completed tasks, new blockers, architectural changes), you MUST explicitly tell KL that: (a) your AGENTS.md has been updated, AND (b) the OneDrive backup copy has been updated. Do not wait for KL to ask. This keeps KL informed and ensures the backup is always current.
 
 ---
 
@@ -308,19 +309,28 @@ Quick reference:
 **Workspace:** `D:\Projects\VocabVista\` (runs scripts from VocabVista but is a separate quest to free up VocabVista for other work)
 
 ### Current Focus
-- **Resuming example sentence generation** -- 720/6,333 words completed (11.4%, 72 batches). Script: `D:\Projects\VocabVista\scripts\generate_example_sentences.py --limit 10000`
-- Script skips already-processed words, so it will continue from batch 73
+- **Example session generation: 6,441/10,814 words completed (59.6%)**
+- Unicode fix applied and working. Script processes words without crashing on special characters.
+- **NOTE:** Total word count is 10,814 (not 6,333 as originally estimated). The original limit was based on words without examples at session start, but DB has grown.
+- Rate: ~120 words/hr. ~4,373 words remaining. ETA: ~36 hours
+- Script auto-restart mechanism created (`scripts/run_until_done2.py`) to handle process exits between batches
+
+### History
+- First run (2026-04-30): 720 words (72 batches) before Tailscale dropped overnight (laptop went to sleep)
+- Tailscale reconnected 2026-05-01 ~06:00
+- Second run: Processed to 5,711 words before Unicode encoding error crashed script (batch print statement with trademark symbol)
+- Unicode fix applied (2026-05-01 12:16): Added try/except around print() calls with `.encode('gbk', errors='replace').decode('gbk')` fallback
+- Generation resumed and progressed to 6,441 words
+- Discovered DB has 10,814 total words (not 6,333 as originally estimated)
+- Auto-restart scripts created: `scripts/run_until_done.py`, `scripts/run_until_done2.py`, `scripts/check_remaining.py`
 
 ### Handoff from VocabVista Backend Quest
-The VocabVista backend quest was running the example sentence generation but stopped due to Tailscale connection loss (KL's laptop went to sleep overnight). Status as of handoff:
-- **Tailscale is now working again** -- ping 100.113.43.60 shows 0% packet loss, 66ms avg
-- **Ollama is responding** -- API returns model list normally
-- **Recommended model:** `qwen3.6:35b-a3b` (MoE, 3B active params, fits in 24GB VRAM)
+The VocabVista backend quest created this coordinator role to free itself for other work. Key setup notes:
+- **Model:** `qwen3.6:35b-a3b` (MoE, 3B active params, fits in 24GB VRAM)
 - **IMPORTANT: Python urllib proxy bypass** -- When calling office Ollama from Python, you MUST use `urllib.request.build_opener(urllib.request.ProxyHandler({}))` to bypass the system GFW proxy, otherwise you get 502 errors. See SKILL-office-pc.md for details.
-- 720 words already have example sentences in the DB. The script skips existing ones.
 
 ### Blockers
-- None currently
+- **RESOLVED (2026-05-01):** Unicode encoding error fixed. Tailscale stable (39-44ms, 0% packet loss), Ollama responding with qwen3.6:35b-a3b
 
 ### Infrastructure Notes
 - Office PC: 100.113.43.60 (Tailscale), RTX 4090, 64GB RAM
