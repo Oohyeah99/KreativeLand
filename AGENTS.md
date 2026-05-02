@@ -287,6 +287,20 @@ The Qoder Admin quest owns the KreativeLand portal website.
 | ZhongkaoPrep | exam.kreativeland.com | LIVE (Vercel) |
 | KreativeLand Portal | kreativeland.com | LIVE (KL confirmed, blocked by GFW from Qoder shell) |
 
+### DNS Records (verified 2026-05-02)
+
+**KreativeLand Zone (Cloudflare):**
+| Record | Type | Value | Status |
+|--------|------|-------|--------|
+| `*.kreativeland.com` | A | 20.255.60.68 | Proxied (wildcard) |
+| `wordpress.kreativeland.com` | A | 20.255.60.68 | DNS only |
+| `www.kreativeland.com` | A | 20.255.60.68 | Proxied |
+
+**BrillKids Zone (Cloudflare):**
+| Record | Type | Value | Status |
+|--------|------|-------|--------|
+| `*.brillkids.com` | A | 54.212.142.227 | Proxied (wildcard) |
+
 ### Azure VM Deployment
 For complete documentation including deployment steps, nginx config, database management, and troubleshooting, see **SKILL-azure-vm.md**.
 
