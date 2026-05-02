@@ -130,20 +130,21 @@ For office PC Ollama access, ComfyUI, and hardware specs, see **SKILL-office-pc.
 
 ## KreativeLand Ecosystem - All Projects
 
-| Project | Type | Tech Stack | Live URL | Status |
-|---------|------|------------|----------|--------|
-| **Vista Admin** | Full-stack API + Admin UI | Python FastAPI + React 18 + Vite 6 | https://admin.kreativeland.com | Active - backend management console |
-| **VocabVista Learner** | React SPA ( Coming Soon ) | React + Spaced Repetition | vocabvista.kreativeland.com (pending) | Active - new learner-facing app |
-| **EnglishExamPrep** | React SPA | React 19, Vite 8, TypeScript 6, Tailwind v4 | https://english.kreativeland.com | Active |
-| **ZhongkaoPrep** | React SPA | React 19, Vite 8, TypeScript 6, Tailwind v4, KaTeX | https://exam.kreativeland.com | Active - v2.0 live |
-| **LittleReader** | React SPA | React 18, Vite 6, Tailwind 3 | https://reader.kreativeland.com | Active |
-| **VocabLearner** | React SPA | React 18, Vite 6, Tailwind 3 | https://vocab.kreativeland.com | **Deprecated** - files kept as archive |
-| **KreativeLand** | Static portfolio hub | HTML/CSS/JS | https://kreativeland.com | Active |
-| **PatternPhonics** | Interactive tool | HTML/CSS/JS | https://phonics.kreativeland.com | Active |
-| **OllamaChat** | Local chat UI | HTML/CSS/JS | Local only | Active |
-| **AIPlayground** | AI multi-provider interface | Express 5, vanilla JS, Ollama + OpenAI + Gemini | ai.kreativeland.com (pending) | Active - v1.1 |
-| **LittleLearner** | Early education platform | TBD | Not deployed | Active - new project |
-| **todoMCP** | MCP service | TypeScript/Node | npm: @jhirono/todomcp | Active |
+**IMPORTANT: Each project has its own deployment URL. NEVER deploy one project's frontend to another project's domain.**
+
+| Project | Type | Tech Stack | Live URL | Vercel Project Name | Status |
+|---------|------|------------|----------|---------------------|--------|
+| **Vista Admin (API)** | Python FastAPI backend | Azure VM 20.255.60.68 | https://api.kreativeland.com | N/A (self-hosted) | Active |
+| **Vista Admin (Console)** | React 18 + Vite 6 | `frontend/` folder | admin.kreativeland.com (pending) | `vocabvista-admin` (NOT deployed) | Local-only mockup |
+| **VocabVista Learner** | React 19 + Vite 8 + Tailwind v4 | `frontend-v2/` folder | https://vocabvista.kreativeland.com | `frontend-v2` | Active |
+| **EnglishExamPrep** | React SPA | `../EnglishExamPrep/` | https://english.kreativeland.com | `english-exam-prep` | Active |
+| **ZhongkaoPrep** | React SPA | `../ZhongkaoPrep/` | https://exam.kreativeland.com | `zhongkao-prep` | Active |
+| **LittleReader** | React SPA | `../LittleReader/` | https://reader.kreativeland.com | `little-reader` | Active |
+| **VocabLearner** | React SPA (deprecated) | `../VocabLearner/` | https://vocab.kreativeland.com | `vocab-learner` | Deprecated |
+| **KreativeLand** | Static HTML/CSS/JS | This folder | https://kreativeland.com | `kreative-land` | Active |
+| **PatternPhonics** | Static HTML/CSS/JS | `../PatternPhonics/` | https://phonics.kreativeland.com | `pattern-phonics` | Active |
+| **AIPlayground** | Express 5 + vanilla JS | `../AIPlayground/` | https://ai.kreativeland.com | `ai-playground` | Active |
+| **LittleLearner** | Early education platform | TBD | Not deployed | N/A | Active - new project |
 
 ### How Projects Interconnect
 ```
@@ -240,6 +241,7 @@ The Qoder Admin quest owns the KreativeLand portal website.
 **To Do list:** "Qoder PM (Quest)"
 
 ### Current Focus
+- **Deployment URL fix (2026-05-02):** Fixed VocabVista deployment confusion where admin frontend was deployed to vocabvista.kreativeland.com (learner app domain). Root cause: root `.vercel/project.json` linked to `frontend-v2` Vercel project, but root `vercel.json` build config pointed to `frontend/` folder. Fixed by deleting root `.vercel/project.json` and adding deployment rules to AGENTS.md. Both AGENTS.md files updated with clear deployment instructions.
 - Media generation pipeline: ComfyUI + Flux (image) + HunyuanVideo (video) -- **Phase 2 COMPLETE (2026-04-20).** Full REST API live: `POST /api/apps/stories/{id}/generate-media` (triggers background pipeline), `GET /api/apps/stories/{id}/media-status` (poll progress + image URLs), `GET /api/comfyui/status` (health check). Scene prompts via Ollama (gemma4:26b with gemma4:e2b CPU fallback for VRAM contention). Images served at `/media/{story_id}/{index}.png`. New files: `schemas_media.py`, `services/media_gen.py`, `routers/media.py`. LittleReader can now use media generation.
 - OpenClaw configuration on office PC (Phase 3 & 4) -- to be done later
 - **Ask Little Learner forum pipeline (2026-04-17):**
@@ -251,6 +253,7 @@ The Qoder Admin quest owns the KreativeLand portal website.
   - Spec: `../LittleLearner/docs/SPEC-forum-ai-pipeline.md`
 
 ### Completed
+- **Topic review UI handoff to Vista Admin (2026-05-02):** Created `TASK-topic-review-admin.md` and `HANDOFF-topic-review-ui.md` for Vista Admin to build admin UI for reviewing 41 pre-created topics. Backend complete with 41 topics (21 Tier 1 + 20 Tier 2), AI word generation, auto-insertion with Chinese translations, new word logging for admin review. **COMPLETED by Vista Admin (2026-05-02):** Topics + New Words tabs built in `mockups/admin-backend.html`, backend deployed with QueueGenerationStats fix, 41 topics seeded to production PostgreSQL, all API endpoints verified.
 - **VocabVista VM migration (2026-04-29):** Full VocabVista backend migrated from old Azure VM (20.205.61.171) to new VM (20.255.60.68). Installed PostgreSQL 16, Python 3.12 venv, FastAPI + all dependencies. Restored database (15,011 words, 4 users, 6,786 vocab entries). Created systemd service + nginx reverse proxy with Let's Encrypt SSL. All API endpoints verified working at https://api.kreativeland.com. Kaley's EnglishExamPrep data confirmed accessible.
 - **Workspace migration from OneDrive to D:\Projects\ (2026-04-29):** Verified all 7 projects at `D:\Projects\` with working git (external `.git` at `D:\GitRepos\`). Fixed hardcoded OneDrive paths in LittleLearner forum scripts (5 files) and VocabVista database utilities (3 files). Old OneDrive copies not deleted per KL request. All commits pushed to GitHub.
 - **New computer migration (2026-04-23):** Fixed all path references from `C:\Users\KL\OneDrive\` to `D:\OneDrive\` across 14 files. Migrated all 7 git repos to `D:\GitRepos\` with external .git pattern. Restructured Quest Registry (Qoder Admin moved to KreativeLand workspace, VocabVista PM moved to VocabVista workspace).
