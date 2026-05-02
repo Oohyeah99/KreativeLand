@@ -1,1 +1,6 @@
-.vercel
+# Vercel: allow project.json (no secrets, safe to commit)
+.vercel/*
+!.vercel/project.json
+nul
+.mcp.json
+.qoder/
